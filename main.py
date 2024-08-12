@@ -1,4 +1,5 @@
 import streamlit as st
+import plotly.express as px
 
 title = st.title("WEATHER FORECAST")
 city = st.text_input(label="", placeholder="Select a city", key="city")
@@ -12,3 +13,10 @@ if city:
     else:
         st.subheader(f"{data_type} for the next {days} days in "
                      f"{city.capitalize()}")
+
+# graph creation
+dates = ["2022-10-12", "2022-10-13", "2022-10-14"]
+temperatures = [10, 11, 12]
+figure = px.line(x=dates, y=temperatures, labels={"x": "Date",
+                                                  "y": "Temperatures"})
+st.plotly_chart(figure)
