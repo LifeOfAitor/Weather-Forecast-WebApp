@@ -1,6 +1,6 @@
 import streamlit as st
 import plotly.express as px
-from backend import get_data
+from backend import get_data, get_dates_temp_cond
 
 title = st.title("WEATHER FORECAST")
 city = st.text_input(label="", placeholder="Select a city", key="city")
@@ -16,11 +16,11 @@ if city:
                      f"{city.capitalize()}")
 
 # get data for graph
-data = get_data(city, days, data_type)
+data = get_data(city, days)
+dates, temperatures, conditions = get_dates_temp_cond(data, data_type)
 
 # graph creation
-dates = ["2022-10-12", "2022-10-13", "2022-10-14"]
-temperatures = [10, 11, 12]
 figure = px.line(x=dates, y=temperatures, labels={"x": "Date",
-                                                  "y": "Temperatures"})
+                                                  "y": "Temperature (C)"})
+# display graph
 st.plotly_chart(figure)
