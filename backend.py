@@ -28,7 +28,7 @@ def get_data(place, days):
 
 
 # process and clean the filtered data
-def get_dates_temp_cond(filtered_data, info_type):
+def get_dates_temp_cond(filtered_data):
     # create all necessary lists
     date_list = []
     temperature = []
@@ -36,12 +36,12 @@ def get_dates_temp_cond(filtered_data, info_type):
     # append info on each list
     for i in range(len(filtered_data)):
         date_list.append(filtered_data[i]["dt_txt"])
-        temperature.append(filtered_data[i]["main"]["temp"])
-        condition.append(filtered_data[i]["weather"][0]["main"])
+        temperature.append(int(filtered_data[i]["main"]["temp"]))
+        condition.append(filtered_data[i]["weather"][0]["main"].title())
     return date_list, temperature, condition
 
 
 if __name__ == "__main__":
-    data = get_data("Tokyo", 2)
-    date, temp, condition = get_dates_temp_cond(data, "Temperature")
+    data = get_data("Irun", 2)
+    date, temp, condition = get_dates_temp_cond(data)
     print(date, temp, condition)
