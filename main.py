@@ -27,7 +27,16 @@ if city:
                   "Rain": "images/rain.png", "Snow": "images/snow.png"}
         output_data = [images[current_condition]
                        for current_condition in conditions]
-        for i in range(len(output_data)):
-            st.image(output_data[i], width=115)
-            st.write(dates[i][:-3])
+        # Maximum number of columns per row
+        max_columns_per_row = 4
+        num_rows = (len(output_data) + max_columns_per_row - 1) // max_columns_per_row
+
+        for row in range(num_rows):
+            cols = st.columns(max_columns_per_row)
+            for i in range(max_columns_per_row):
+                idx = row * max_columns_per_row + i
+                if idx < len(output_data):
+                    with cols[i]:
+                        st.image(output_data[idx], width=115)
+                        st.write(dates[idx][:-3])
 
