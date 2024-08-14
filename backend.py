@@ -36,7 +36,7 @@ def get_dates_temp_cond(filtered_data):
     # append info on each list
     for i in range(len(filtered_data)):
         date_list.append(filtered_data[i]["dt_txt"])
-        temperature.append(int(filtered_data[i]["main"]["temp"]))
+        temperature.append(filtered_data[i]["main"]["temp"])
         condition.append(filtered_data[i]["weather"][0]["main"].title())
     return date_list, temperature, condition
 
